@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Build
+        run: ./gradlew clean build
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            build/libs/dropped-item-hider-*.jar \
+            --title "Dropped Item Hider ${GITHUB_REF_NAME}" \
+            --notes "Minimal client-side Fabric mod for Minecraft 1.21.4 that skips dropped item rendering. Press K to toggle." \
+            --latest

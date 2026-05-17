@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "dropped-item-hider",
+	"version": "${version}",
+	"name": "Dropped Item Hider",
+	"description": "Tiny Fabric mod that hides dropped item rendering with a keybind.",
+	"authors": [
+		"baziu_127"
+	],
+	"license": "MIT",
+	"icon": "assets/dropped-item-hider/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.droppeditemhider.DroppedItemHiderClient"
+		]
+	},
+	"mixins": [
+		"dropped-item-hider.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"fabric-api": "*",
+		"minecraft": "${mc_version}",
+		"java": ">=21"
+	}
+}
